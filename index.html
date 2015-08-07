@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html lang="ja" dir="ltr">
+<meta charset="utf-8">
+<head>
+  <title>stop-copy</title>
+  <style>
+  h2, h3 {
+    margin-top: 50px;
+  }
+  small {
+    font-size: 70%;
+  }
+  table {
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    width: 100%;
+  }
+  tr {
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+  }
+  th, td {
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  .user-select {
+    -moz-user-select: none; /* Firefox */
+    -webkit-user-select: none; /* Safari、Chromeなど */
+    -ms-user-select: none; /* IE10かららしい */
+    user-select: none; /* CSS3 */
+  }
+  pre {
+    font-size: 16px
+  }
+  .target {
+    color: #44ce57;
+    font-weight: bold;
+  }
+  </style>
+</head>
+<body>
+<h1>no copy test</h1>
+<table>
+  <colgroup>
+    <col width="30%">
+    <col width="21%">
+    <col width="7%">
+    <col width="7%">
+    <col width="7%">
+    <col width="7%">
+    <col width="7%">
+    <col width="7%">
+    <col width="7%">
+  </colgroup>
+  <tr>
+    <th>attr/event</th>
+    <td>img</td>
+    <td>ie7</td>
+    <td>ie8</td>
+    <td>ie9</td>
+    <td>ie10</td>
+    <td>chrome</td>
+    <td>firefox</td>
+    <td>safari</td>
+  </tr>
+  <tr>
+    <th>user-select: none<br><small>マウスドラッグ等で要素選択できなくする</small></th>
+    <td><img src="https://farm9.staticflickr.com/8786/17841270820_d69b9c3b6b_k_d.jpg" alt="うなこ" width="200" class="user-select" /></td>
+    <td class="ie07">x</td>
+    <td class="ie08">x</td>
+    <td class="ie09">x</td>
+    <td class="ie10">x</td>
+    <td class="chro">o</td>
+    <td class="fire">o</td>
+    <td class="safa">o</td>
+  </tr>
+  <tr>
+    <th>draggable="false"<br><small>要素をマウスでドラッグ＆コピーできなくする</small></th>
+    <td><img src="https://farm9.staticflickr.com/8786/17841270820_d69b9c3b6b_k_d.jpg" alt="うなこ" width="200" draggable="false" /></td>
+    <td class="ie07">x</td>
+    <td class="ie08">x</td>
+    <td class="ie09">x</td>
+    <td class="ie10">o</td>
+    <td class="chro">o</td>
+    <td class="fire">o</td>
+    <td class="safa">o</td>
+  </tr>
+  <tr>
+    <th>unselectable="on"<br><small>上のdraggableのIE独自拡張版？</small></th>
+    <td><img src="https://farm9.staticflickr.com/8786/17841270820_d69b9c3b6b_k_d.jpg" alt="うなこ" width="200" unselectable="on" /></td>
+    <td class="ie07">o</td>
+    <td class="ie08">o</td>
+    <td class="ie09">o</td>
+    <td class="ie10">o</td>
+    <td class="chro">x</td>
+    <td class="fire">x</td>
+    <td class="safa">x</td>
+  </tr>
+  <tr>
+    <th>oncontextmenu="return false;"<br><small>イベントをバインドして、メニューを開かせない（属性）</small></th>
+    <td><img src="https://farm9.staticflickr.com/8786/17841270820_d69b9c3b6b_k_d.jpg" alt="うなこ" width="200" oncontextmenu="return false;" /></td>
+    <td class="ie07">o</td>
+    <td class="ie08">o</td>
+    <td class="ie09">o</td>
+    <td class="ie10">o</td>
+    <td class="chro">o</td>
+    <td class="fire">o</td>
+    <td class="safa">o</td>
+  </tr>
+  <tr>
+    <th>$('****').on('contextmenu', function(){});<br><small>イベントをバインドして、メニューを開かせない（JS）</small></th>
+    <td><img src="https://farm9.staticflickr.com/8786/17841270820_d69b9c3b6b_k_d.jpg" alt="うなこ" width="200" class="js--context-menu" /></td>
+    <td class="ie07">o</td>
+    <td class="ie08">o</td>
+    <td class="ie09">o</td>
+    <td class="ie10">o</td>
+    <td class="chro">o</td>
+    <td class="fire">o</td>
+    <td class="safa">o</td>
+  </tr>
+</table>
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script>
+(function($){
+$('.js--context-menu').on('contextmenu', function(){
+  return false;
+});
+})(jQuery);
+</script>
+</body>
+</html>
